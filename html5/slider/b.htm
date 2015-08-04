@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ch" manifest="/appcache/act/0001?_t=1410585809778">
+	<head>
+	<title>demo</title>
+	<meta charset="utf-8" />
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="pragram" content="no-cache" />
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.touchSwipe.js" ></script>
+	<script type="text/javascript" src="js/jquery.transit.js" ></script>
+	
+	<style type="text/css">
+	
+html{
+overflow:hidden;
+}
+body
+{
+	margin:0;padding:0;
+}
+
+
+.xyz{
+	-webkit-overflow-scrolling: touch;
+	-webkit-backface-visibility:hidden;
+}
+
+
+
+
+	</style>
+	</head>
+
+	<body>
+
+
+
+<script>
+	$(function(){
+		
+		var w_h = parseInt($(window).height()/2);
+		
+		$('.page_card').css('height',w_h);
+		
+		$('#pd_container').css({width:$(window).width()});
+		$('.page_card').css({width:$(window).width()});
+		
+		
+		$('.page1').css({y:-w_h});
+		
+		
+		$("#pd_container").swipe({
+			swipeStatus:function(event, phase, direction, distance, duration, fingers, fingerData) {
+
+				event.preventDefault();
+				
+			if(phase==$.fn.swipe.phases.PHASE_START) {
+				//$('.page2').text("moving:"+direction+":"+distance);
+			} 
+
+			if(phase==$.fn.swipe.phases.PHASE_CANCEL) {
+				$('.page2').html("swipe cancelled (due to finger count) "  );
+			}   
+			
+			if (direction=='down'){
+				
+	
+	    		
+	    		$('.page1').css({'-webkit-transform':'translateZ(0) translateY('+distance+'px) '});
+	    		
+	    	
+	    		var scale_dis = parseInt(distance);
+	    		if (scale_dis>1000000){
+	    			scale_dis = 1000000;
+	    		}
+	    		var next_scale = 1-(scale_dis/10000);
+	    		var next_opacity = 1-(scale_dis/1000);
+	    		var up_dis = parseInt(distance/2);
+	    		//$('.page2').transition({y:up_dis},0).transition({scale:next_scale},0).transition({opacity:next_opacity},0); 
+	    		
+	    		$('.page2').css({'-webkit-transform':'translateZ(0) translateY('+up_dis+'px)  ','opacity':next_opacity});
+
+	    		
+	    		
+			}
+
+			$('.page2').text("moving:"+direction+":"+distance);
+			
+			
+			
+			
+		  },
+		  swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+			 $('.page2').html("You swiped " + direction + " with " + fingerCount + " fingers");
+		  },
+		  threshold:0,
+		  fingers:1
+		});
+		
+		
+		
+		
+	});
+</script>
+
+
+<div id="pd_container" class="animate xyz" style="overflow:hidden;padding:0px;margin:0px;">
+
+	<div class="page_card page1 animate xyz" style="position:absolute; background-image: url(http://bcs.duapp.com/resstorage/xhlf/img/4.jpg) ">
+	aaa
+	</div>
+
+	<div class="page_card page2 animate xyz" style="position:absolute; background-image: url(http://bcs.duapp.com/resstorage/xhlf/img/3.jpg)">
+	bbbb
+	</div>
+	
+</div>
+
+
+
+
+
+	
+	</body>
+	</html>

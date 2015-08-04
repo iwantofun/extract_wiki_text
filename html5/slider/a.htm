@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ch" manifest="/appcache/act/0001?_t=1410585809778">
+	<head>
+	<title>demo</title>
+	<meta charset="utf-8" />
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="pragram" content="no-cache" />
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.touchSwipe.js" ></script>
+	<script type="text/javascript" src="js/jquery.transit.js" ></script>
+	
+	<style type="text/css">
+	
+html{
+overflow:hidden;
+}
+body
+{
+	margin:0;padding:0;
+}
+
+.xyz{
+
+}
+
+	</style>
+	</head>
+
+	<body>
+
+
+
+<script>
+	$(function(){
+		
+		var w_h = parseInt($(window).height()/2);
+		
+		$('.page_card').css('height',w_h);
+		
+		$('#pd_container').css({width:$(window).width(),height:w_h});
+		$('.page_card').css({width:$(window).width()});
+		
+		
+		$('.page1').css({y:-w_h});
+		
+		
+		//$('.page_card').css({height:'300px'});
+	    
+	    $('#pd_container').bind("touchstart", function (event) {
+	    	var x = event.originalEvent.touches[0].clientX;
+	    	var y = event.originalEvent.touches[0].clientY;
+	    	$(this).attr('start_x',x);
+	    	$(this).attr('start_y',y);
+	    	$(this).attr('end_x',x);
+	    	$(this).attr('end_y',y);
+	    	
+
+	    	
+	    });
+	    
+	    $('#pd_container').bind("touchmove", function (event) {
+	    	
+	    	var x = event.originalEvent.touches[0].clientX;
+	    	var y = event.originalEvent.touches[0].clientY;
+	    	$(this).attr('end_x',x);
+	    	$(this).attr('end_y',y);
+	    	
+	    	var start_y = $(this).attr('start_y');
+	    	var dis = y-start_y;
+	    	
+	    	
+	    	
+	    	if (dis>0){ //显示上面的图片
+	    		
+	    		
+	    		
+	    		//$('.page1').transition({y:scroll_dis},0);
+	    		
+	    		$('.page1').css({'-webkit-transform':'translateY('+dis+'px) translateZ(0px)'});
+	    		
+	    	
+	    		var scale_dis = parseInt(dis);
+	    		if (scale_dis>1000000){
+	    			scale_dis = 1000000;
+	    		}
+	    		var next_scale = 1-(scale_dis/10000);
+	    		var next_opacity = 1-(scale_dis/1000);
+	    		var up_dis = parseInt(dis/2);
+	    		//$('.page2').transition({y:up_dis},0).transition({scale:next_scale},0).transition({opacity:next_opacity},0); 
+	    		
+	    		$('.page2').css({'-webkit-transform':'translateY('+up_dis+'px) translateZ(0px)','opacity':next_opacity});
+
+
+	    		
+	    	}else{ //显示下面的图片
+	    		
+	    	}
+	    	
+	    	
+	    });
+	    
+	    $('#pd_container').bind("touchend", function (event) {
+	    		    	
+	    	
+	    	var start_x = $(this).attr('start_x');
+	    	var start_y = $(this).attr('start_y');
+	    	
+
+	    	var end_x = $(this).attr('end_x');
+	    	var end_y = $(this).attr('end_y');
+	    	
+	    	var hited = 0;
+	    	var dis = end_y-start_y;
+	    	
+	    	if (Math.abs(dis)>20){
+	    		if (dis>0){
+		    		//alert('显示上面的图片');
+		    	}else{
+		    		//alert('显示下面的图片');
+		    	}
+	    	}
+	    	
+	    	
+	    	
+	    	
+	    	
+
+	    });
+	    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	});
+</script>
+
+
+
+<div id="pd_container" class="animate xyz" style="overflow:hidden;padding:0px;margin:0px;">
+
+	<div class="page_card page1 animate xyz" style="position:absolute; background-image: url(http://bcs.duapp.com/resstorage/xhlf/img/4.jpg) ">
+	aaa
+	</div>
+
+	<div class="page_card page2 animate xyz" style="position:absolute; background-image: url(http://bcs.duapp.com/resstorage/xhlf/img/3.jpg)">
+	bbbb
+	</div>
+	
+</div>
+
+
+
+
+	
+	</body>
+	</html>

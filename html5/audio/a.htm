@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ch" manifest="/appcache/act/0001?_t=1410585809778">
+	<head>
+	<title>demo</title>
+	<meta charset="utf-8" />
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="pragram" content="no-cache" />
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.touchSwipe.js" ></script>
+	<script type="text/javascript" src="js/jquery.transit.js" ></script>
+	
+	<style type="text/css">
+	
+html{
+overflow:hidden;
+}
+body
+{
+	margin:0;padding:0;
+}
+
+.xyz{
+
+}
+
+	</style>
+	</head>
+
+	<body>
+
+
+
+<script>
+var snd = new Audio("burning.mp3");
+snd.play();
+
+//alert(snd.canPlayType("audio/mp3"));
+
+setTimeout(function(){
+	try{
+		snd.pause();
+	}catch(e){
+		alert(e);
+	}
+},5000);
+
+</script>
+
+
+
+	
+	</body>
+	</html>
